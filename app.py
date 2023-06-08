@@ -21,25 +21,25 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 mail = Mail(app)
 
 mydb = mysql.connector.connect(
-    host=os.environ.get('MYSQLHOST'),
-    user=os.environ.get('MYSQLUSER'),
-    password=os.environ.get('MYSQLPASSWORD'),
-    database=os.environ.get('MYSQLDATABASE')
+    host=os.environ['MYSQLHOST'],
+    user=os.environ['MYSQLUSER'],
+    password=os.environ['MYSQLPASSWORD'],
+    database=os.environ['MYSQLDATABASE']
 )
 cursor = mydb.cursor(buffered=True, dictionary=True)
 
-get_blogs_query = """ 
-SELECT * FROM blog
+get_blog_articles_query = """ 
+SELECT * FROM blog_articles
 """
 
-cursor.execute(get_blogs_query)
-blogs = cursor.fetchall()
+cursor.execute(get_blog_articles_query)
+blog_articles = cursor.fetchall()
 
 
 @app.route('/get-blogs', methods=['GET'])
 @cross_origin(origins='https://pierregoaerv2.netlify.app/')
 def get_blogs():
-    return jsonify(blogs), 200
+    return jsonify(blog_articles), 200
 
 
 @app.route('/contact', methods=['POST', 'OPTIONS'])
