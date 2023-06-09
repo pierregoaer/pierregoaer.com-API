@@ -46,7 +46,7 @@ def contact():
     if request.method == "OPTIONS":
         # Handle CORS preflight request
         response = jsonify({"message": "CORS preflight request successful"})
-        response.headers.add("Access-Control-Allow-Origin", "https://pierregoaer.com, https://www.pierregoaer.com, https://pierregoaer.com/, https://www.pierregoaer.com/")
+        response.headers.add("Access-Control-Allow-Origin", "https://pierregoaer.com/")
         response.headers.add("Access-Control-Allow-Headers", "Content-Type")
         response.headers.add("Access-Control-Allow-Methods", "POST")
         return response
