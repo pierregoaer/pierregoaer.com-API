@@ -33,7 +33,7 @@ SELECT * FROM blog_articles
 cursor.execute(get_blog_articles_query)
 blog_articles = cursor.fetchall()
 
-CORS(app)
+CORS(app, origins="https://pierregoaer.com")
 
 
 @app.route('/get-blogs', methods=['GET'])
@@ -46,7 +46,7 @@ def contact():
     if request.method == "OPTIONS":
         # Handle CORS preflight request
         response = jsonify({"message": "CORS preflight request successful"})
-        response.headers.add("Access-Control-Allow-Origin", "https://pierregoaer.com/")
+        response.headers.add("Access-Control-Allow-Origin", "https://pierregoaer.com")
         response.headers.add("Access-Control-Allow-Headers", "Content-Type")
         response.headers.add("Access-Control-Allow-Methods", "POST")
         return response
