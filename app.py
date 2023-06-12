@@ -58,14 +58,6 @@ def contact():
         email = form_data["email"]
         message = form_data["message"]
         today = datetime.today().strftime("%d/%m/%Y %H:%M:%S")
-        # print(form_data)
-
-        # update google sheet
-        # contacts_worksheet = gsheet_file.worksheet("contacts")
-        # worksheet_rows = len(contacts_worksheet.get_all_values())
-        # new_data = [today, name, email, phone, service, timeframe, budget, message]
-        # for col in range(1, len(new_data) + 1):
-        #     contacts_worksheet.update_cell(worksheet_rows + 1, col, str(new_data[col - 1]))
 
         # send email notification
         html = f"pierregoaer.com - New Message!<br>" \
@@ -94,6 +86,8 @@ def contact():
         }
         cursor.execute(add_submission_query, new_submission)
         mydb.commit()
+
+        # send response
         response = jsonify(message="Message sent successfully")
         return response
 
