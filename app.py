@@ -81,6 +81,19 @@ def contact():
             recipients=[os.environ["EMAIL_RECIPIENT"]]
         )
         mail.send(msg)
+
+        # add submission to database
+        add_submission_query = """ 
+        INSERT INTO form_submissions (name, email, message)
+        VALUES (%(name)s, %(email)s, %(message)s)
+        """
+        new_submission = {
+            'name': name,
+            'email': email,
+            'message': message
+        }
+        cursor.execute(add_submission_query, new_submission)
+        mydb.commit()
         response = jsonify(message="Message sent successfully")
         return response
 
